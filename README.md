@@ -2,6 +2,8 @@
 
 A searchable public reference library for Mesisem Global LLC. It contains curated, original summaries and outbound source links—not private business records or wholesale copies of publisher websites.
 
+Temporary public site: **https://mesisem-public-resources.pages.dev**. This is not the final product domain.
+
 Every release must use [TODO.md](TODO.md) for development, final deployment confirmation, further work and maintenance, and record publish results in [PUBLISH_LOG.md](PUBLISH_LOG.md). Confirm the final steps with the project owner before deploying.
 
 ## Scope
@@ -35,13 +37,13 @@ This repository contains only the Mesisem resource project. Its standalone packa
 
 The build generates actual HTML catalog and detail pages, route-specific metadata, structured data, JSON/CSV data and robots.txt. Reading the production output does not require JavaScript. React replaces the static content with the searchable interface.
 
-The final product domain is **not selected yet**. The planned Cloudflare Pages deployment is a temporary public copy with `SITE_URL` unset, subject to final-step confirmation. The build emits `sitemap-pending.json` rather than fabricated canonical URLs or a sitemap, and marks temporary responses `noindex, follow` through HTML metadata and a Cloudflare `_headers` file. This is intentionally browsable but excluded from search indexing.
+The final product domain is **not selected yet**. The approved Cloudflare Pages deployment is a temporary public copy with `SITE_URL` unset. The build emits `sitemap-pending.json` rather than fabricated canonical URLs or a sitemap, and marks temporary responses `noindex, follow` through HTML metadata and a Cloudflare `_headers` file. This is intentionally browsable but excluded from search indexing.
 
 Once the final domain is approved, set `SITE_URL` to its HTTPS origin and rebuild to generate absolute canonical/social URLs and `sitemap.xml` and remove the temporary indexing restriction. Do not use the company website's domain or a preview URL without approval. Indexing and ranking are never guaranteed.
 
 ## Cloudflare Pages
 
-Use a dedicated Pages project linked only to `mgtechgroup/mesisem-global-llc`:
+The dedicated Pages project `mesisem-public-resources` is linked only to `mgtechgroup/mesisem-global-llc`:
 
 - Production branch: `main`; pushes trigger builds and deployments.
 - Root directory: repository root.

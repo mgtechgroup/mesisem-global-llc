@@ -13,16 +13,16 @@ Keep this list current for every release. Do not mark remote work complete based
 
 ## Required before deployment
 
-- [ ] Explain and obtain confirmation of the final deployment steps.
-- [ ] Confirm the GitHub repository, Cloudflare target, branch and public visibility.
-- [ ] Confirm temporary hosting versus the final product domain.
-- [ ] Confirm any costs, DNS changes, secrets and external-account changes; do not assume approval.
+- [x] Explain and obtain confirmation of the final deployment steps.
+- [x] Confirm the GitHub repository, Cloudflare target, branch and public visibility.
+- [x] Confirm temporary hosting versus the final product domain.
+- [x] Confirm any costs, DNS changes, secrets and external-account changes; do not assume approval.
 - [x] Push the reviewed source update and verify the remote files.
-- [ ] Deploy only this resource hub to its dedicated Cloudflare Pages project.
-- [ ] Verify the deployment's build result and commit reference.
-- [ ] Check the live homepage, resource deep link, methodology, JSON and CSV.
-- [ ] Check temporary indexing headers and ensure final-domain metadata is not fabricated.
-- [ ] Update `PUBLISH_LOG.md` with the actual result, verification and any blockers.
+- [x] Deploy only this resource hub to its dedicated Cloudflare Pages project.
+- [x] Verify the deployment's build result and commit reference.
+- [x] Check the live homepage, resource deep link, methodology, JSON and CSV.
+- [x] Check temporary indexing headers and ensure final-domain metadata is not fabricated.
+- [x] Update `PUBLISH_LOG.md` with the actual result, verification and any blockers.
 
 ## Further work
 
