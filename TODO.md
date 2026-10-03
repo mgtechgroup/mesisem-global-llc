@@ -17,7 +17,7 @@ Keep this list current for every release. Do not mark remote work complete based
 - [ ] Confirm the GitHub repository, Cloudflare target, branch and public visibility.
 - [ ] Confirm temporary hosting versus the final product domain.
 - [ ] Confirm any costs, DNS changes, secrets and external-account changes; do not assume approval.
-- [ ] Push the reviewed source update and verify the remote files.
+- [x] Push the reviewed source update and verify the remote files.
 - [ ] Deploy only this resource hub to its dedicated Cloudflare Pages project.
 - [ ] Verify the deployment's build result and commit reference.
 - [ ] Check the live homepage, resource deep link, methodology, JSON and CSV.

@@ -18,9 +18,10 @@ Maintain a factual entry for each publish attempt. Include its target, branch, c
 - Planned hosting: a dedicated GitHub-linked Cloudflare Pages project, separate from existing projects.
 - Changes: pinned Node.js runtime, temporary-host noindex metadata/headers, Pages build instructions, mandatory development/release/maintenance checklist and this log.
 - Local checks: standalone typecheck/build passed; all 19 temporary HTML routes, noindex headers, JSON/CSV exports and dependency isolation verified.
-- Remote source update: pending; record the GitHub result below after verification.
+- Remote source update: succeeded at commit `449f1df31d3f38f6919eafa21139f21949d4c489`; all 86 public files matched the remote tree.
 - Hosting: not deployed; final-step confirmation is required.
 - Final product domain: unset; no DNS changes or paid add-ons are authorized.
+- Log/checklist bookkeeping is committed afterward; see the repository's `main` history for that commit.
 
 ## Entry template
 
