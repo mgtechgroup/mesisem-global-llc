@@ -2,6 +2,8 @@
 
 A searchable public reference library for Mesisem Global LLC. It contains curated, original summaries and outbound source links—not private business records or wholesale copies of publisher websites.
 
+Every release must use [TODO.md](TODO.md) for development, final deployment confirmation, further work and maintenance, and record publish results in [PUBLISH_LOG.md](PUBLISH_LOG.md). Confirm the final steps with the project owner before deploying.
+
 ## Scope
 
 - Search, categories, review labels, type filters and resource details.
@@ -33,7 +35,25 @@ This repository contains only the Mesisem resource project. Its standalone packa
 
 The build generates actual HTML catalog and detail pages, route-specific metadata, structured data, JSON/CSV data and robots.txt. Reading the production output does not require JavaScript. React replaces the static content with the searchable interface.
 
-This resource hub is **not published yet**. Set `SITE_URL` to its approved HTTPS production origin and rebuild to generate absolute canonical/social URLs and `sitemap.xml`. Do not use the company website's domain or a preview URL without domain approval. Without `SITE_URL` the build emits `sitemap-pending.json` rather than a fabricated sitemap. Confirm clean deep-link serving on the chosen host, including trailing-slash detail paths and SPA fallback for client navigation. Indexing and ranking are never guaranteed.
+The final product domain is **not selected yet**. The planned Cloudflare Pages deployment is a temporary public copy with `SITE_URL` unset, subject to final-step confirmation. The build emits `sitemap-pending.json` rather than fabricated canonical URLs or a sitemap, and marks temporary responses `noindex, follow` through HTML metadata and a Cloudflare `_headers` file. This is intentionally browsable but excluded from search indexing.
+
+Once the final domain is approved, set `SITE_URL` to its HTTPS origin and rebuild to generate absolute canonical/social URLs and `sitemap.xml` and remove the temporary indexing restriction. Do not use the company website's domain or a preview URL without approval. Indexing and ranking are never guaranteed.
+
+## Cloudflare Pages
+
+Use a dedicated Pages project linked only to `mgtechgroup/mesisem-global-llc`:
+
+- Production branch: `main`; pushes trigger builds and deployments.
+- Root directory: repository root.
+- Build command: `pnpm install --frozen-lockfile && pnpm typecheck && pnpm build`.
+- Output directory: `dist/public`.
+- Build image: v3; Node.js `22.16.0` is pinned in `.node-version`.
+- Pin `PNPM_VERSION` to the version in `package.json`'s `packageManager` field.
+- Leave `SITE_URL` unset until the final domain is approved.
+
+No runtime secrets, Functions, paid add-ons or DNS changes are needed. Cloudflare serves the generated HTML for matching resource and methodology routes, with its default SPA fallback for other client-side routes. Do not add a catch-all rewrite that replaces the independently readable HTML pages.
+
+Keep the temporary Pages address separate from the eventual product domain. Check the deployment status, homepage, a deep resource link, the methodology page and JSON/CSV downloads after each release. Existing Cloudflare projects and neighboring private workspace files are outside this deployment's scope.
 
 ## Maintain the catalog
 

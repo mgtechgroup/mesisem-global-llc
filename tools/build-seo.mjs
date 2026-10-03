@@ -33,10 +33,11 @@ async function page(route, title, description, body, structured) {
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="${e(title)}">
 <meta name="twitter:description" content="${e(description)}">
+${origin ? '' : '<meta name="robots" content="noindex, follow">'}
 ${canonical ? `<meta name="site-origin" content="${e(origin)}"><link rel="canonical" href="${e(canonical)}"><meta property="og:url" content="${e(canonical)}">` : ''}
 ${image ? `<meta property="og:image" content="${e(image)}"><meta name="twitter:image" content="${e(image)}">` : ''}
 <script type="application/ld+json">${JSON.stringify(structured).replace(/</g, '\\u003c')}</script>`;
-  let html = template.replace(/<title>[\s\S]*?<\/title>/, '').replace(/<meta\s+(?:name="(?:description|twitter:[^"]+)"|property="og:[^"]+")\s+[^>]*>/g, '');
+  let html = template.replace(/<title>[\s\S]*?<\/title>/, '').replace(/<meta\s+(?:name="(?:description|robots|twitter:[^"]+)"|property="og:[^"]+")\s+[^>]*>/g, '');
   html = html.replace('</head>', metadata + crawlStyles + '</head>');
   const fallback = `<main class="crawl-content"><nav>${link('', 'Mesisem Public Resources')}${link('methodology/', 'Collection policy')}<a href="${e(local('data/resources.json'))}">JSON catalog</a><a href="${e(local('data/resources.csv'))}">CSV catalog</a></nav>${body}</main>`;
   // Content is present even with JS disabled. React replaces the static root on load.
@@ -61,6 +62,9 @@ for (const r of catalog.resources) {
     { '@context': 'https://schema.org', '@type': 'WebPage', name: r.title, description: r.summary, dateModified: r.reviewedAt, citation: r.sourceUrl, ...(absolute(route) ? { url: absolute(route) } : {}) });
 }
 await writeFile(path.join(out, 'robots.txt'), `User-agent: *\nAllow: ${base}\n${origin ? `Sitemap: ${absolute('sitemap.xml')}\n` : '# Sitemap awaits approved SITE_URL. No development URL published.\n'}`);
+// Pages serves this header on all temporary-host responses, including data files.
+// Rebuilding with an approved SITE_URL removes the temporary indexing restriction.
+await writeFile(path.join(out, '_headers'), `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n${origin ? '' : '  X-Robots-Tag: noindex, follow\n'}`);
 if (origin) await writeFile(path.join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(route => `<url><loc>${e(absolute(route))}</loc><lastmod>${catalog.updatedAt}</lastmod></url>`).join('')}</urlset>`);
 else await writeFile(path.join(out, 'sitemap-pending.json'), JSON.stringify({ reason: 'Set SITE_URL to the approved published origin and rebuild to emit sitemap.xml and canonical/social URLs.', routes: routes.map(local) }, null, 2));
 console.log(`Generated ${routes.length} crawlable HTML pages; ${origin ? 'canonical URLs and sitemap ready' : 'production URL pending'}.`);
