@@ -41,14 +41,19 @@ Maintain a factual entry for each publish attempt. Include its target, branch, c
 - Final product URL: still undecided; `SITE_URL` remains unset.
 - Further work: approve the final domain and any DNS changes, then rebuild and verify final metadata/indexing. Agree on a maintenance schedule and maintainer.
 
-## Final-domain Cloudflare Pages cutover — in progress
+## Final-domain Cloudflare Pages cutover — succeeded
 
-- Date/time: 2026-10-10 (UTC).
-- Target repository: `mgtechgroup/mesisem-global-llc`, branch `main`; hosting project: `mesisem-public-resources`.
-- Approved public origin: `https://mesisemglobal.com`; `www.mesisemglobal.com` is also attached to Pages.
-- Changes applied: apex and `www` CNAMEs now target `mesisem-public-resources.pages.dev`; production `SITE_URL` is set to `https://mesisemglobal.com`. Existing proxy/TTL settings and all MX, TXT, and NS records were preserved. No database, Vercel project, or other Cloudflare project was changed.
-- Validation: Cloudflare reported both custom-domain verifications active, with HTTP validation still pending. At 2026-10-10 10:51 UTC, both public hosts returned HTTP 522; the Pages production build had not yet rerun with the new setting.
-- Outcome: in progress; GitHub `main` push will trigger the production build. Do not treat either custom host as live until the new deployment and HTTP checks pass.
+- Completed: 2026-10-10T10:53:44.444723Z (UTC, Cloudflare deployment completion).
+- Approved public origin: `https://mesisemglobal.com`; `www.mesisemglobal.com` is attached to the same Pages project.
+- Repository: `mgtechgroup/mesisem-global-llc`, branch `main`; deployed source commit: `0d7295aca5aa4ae5021e8ed2eb7b0785eafe3f83`.
+- Pages project: `mesisem-public-resources`; deployment ID: `45f52006-bcef-4856-a1b5-4a678193a22f`; deployment URL: `https://45f52006.mesisem-public-resources.pages.dev`.
+- Outcome: Cloudflare reported queued, initialize, clone, build and deploy stages successful. The production build command was `pnpm install --frozen-lockfile && pnpm typecheck && pnpm build`; `build` validates the catalog, builds the site and generates SEO files. There is no standalone `test` script in `package.json`.
+- Live verification: apex, `www`, and the Pages preview returned HTTP 200; both Pages custom domains reported `active`. All 19 sitemap routes returned 200 and canonicalized to the apex; the sitemap contains 19 final-origin URLs; `robots.txt` allows crawling and points to that sitemap; the temporary noindex header/meta is absent. JSON contains 17 records; CSV returns 17 data rows plus a header; JS and CSS assets returned 200.
+- DNS: only the apex and `www` CNAME targets were changed to `mesisem-public-resources.pages.dev`; existing proxy and TTL settings were preserved. Other DNS records, including mail, verification and nameserver records, were not changed. The Vercel project was not deleted; public DNS no longer points these hosts to it.
+- `SITE_URL`: production setting is `https://mesisemglobal.com`; canonical URLs and sitemap now use the approved origin.
+- Databases: none changed in this hosting release. The current application serves static JSON/CSV; a Supabase/Neon source-of-truth and synchronization plan remains a separate follow-up.
+- Costs and secrets: no paid add-ons or secret changes were made.
+- Follow-up: decide whether and when to submit the sitemap to search engines; review the database data flow before adding a backend.
 
 ## Entry template
 
