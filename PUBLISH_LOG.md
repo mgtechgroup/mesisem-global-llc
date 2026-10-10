@@ -41,6 +41,15 @@ Maintain a factual entry for each publish attempt. Include its target, branch, c
 - Final product URL: still undecided; `SITE_URL` remains unset.
 - Further work: approve the final domain and any DNS changes, then rebuild and verify final metadata/indexing. Agree on a maintenance schedule and maintainer.
 
+## Final-domain Cloudflare Pages cutover — in progress
+
+- Date/time: 2026-10-10 (UTC).
+- Target repository: `mgtechgroup/mesisem-global-llc`, branch `main`; hosting project: `mesisem-public-resources`.
+- Approved public origin: `https://mesisemglobal.com`; `www.mesisemglobal.com` is also attached to Pages.
+- Changes applied: apex and `www` CNAMEs now target `mesisem-public-resources.pages.dev`; production `SITE_URL` is set to `https://mesisemglobal.com`. Existing proxy/TTL settings and all MX, TXT, and NS records were preserved. No database, Vercel project, or other Cloudflare project was changed.
+- Validation: Cloudflare reported both custom-domain verifications active, with HTTP validation still pending. At 2026-10-10 10:51 UTC, both public hosts returned HTTP 522; the Pages production build had not yet rerun with the new setting.
+- Outcome: in progress; GitHub `main` push will trigger the production build. Do not treat either custom host as live until the new deployment and HTTP checks pass.
+
 ## Entry template
 
 - Date/time (with timezone):
