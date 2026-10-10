@@ -32,7 +32,7 @@ Keep this list current for every release. Do not mark remote work complete based
 - [x] Verify final canonical URLs, 19-route sitemap, live routes/data exports, and removal of temporary noindex; `www` serves the apex-canonical site without a separate redirect.
 - [ ] Confirm whether and when to submit the final sitemap to search engines.
 - [ ] Review new public-source candidates before publishing them.
-- [ ] Define the requested Supabase/Neon catalog data flow and synchronization before adding database storage; the live site currently serves static JSON/CSV.
+- [x] Keep the catalog on static JSON/CSV; no Supabase/Neon database layer is needed for this release.
 - [ ] Recheck the currently unavailable company website before changing its status.
 
 ## Maintenance — every release or scheduled review
