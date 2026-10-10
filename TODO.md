@@ -26,12 +26,13 @@ Keep this list current for every release. Do not mark remote work complete based
 
 ## Further work
 
-- [ ] Select and explicitly approve the final HTTPS product domain.
-- [ ] Separately approve any DNS/custom-domain changes.
-- [ ] Set `SITE_URL` to the approved origin and rebuild.
-- [ ] Verify canonical/social URLs, sitemap, redirects and removal of temporary noindex.
+- [x] Select and explicitly approve the final HTTPS product domain.
+- [x] Separately approve any DNS/custom-domain changes.
+- [x] Set `SITE_URL` to the approved origin and rebuild.
+- [x] Verify final canonical URLs, 19-route sitemap, live routes/data exports, and removal of temporary noindex; `www` serves the apex-canonical site without a separate redirect.
 - [ ] Confirm whether and when to submit the final sitemap to search engines.
 - [ ] Review new public-source candidates before publishing them.
+- [ ] Define the requested Supabase/Neon catalog data flow and synchronization before adding database storage; the live site currently serves static JSON/CSV.
 - [ ] Recheck the currently unavailable company website before changing its status.
 
 ## Maintenance — every release or scheduled review
