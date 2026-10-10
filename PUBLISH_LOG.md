@@ -51,7 +51,7 @@ Maintain a factual entry for each publish attempt. Include its target, branch, c
 - Live verification: apex, `www`, and the Pages preview returned HTTP 200; both Pages custom domains reported `active`. All 19 sitemap routes returned 200 and canonicalized to the apex; the sitemap contains 19 final-origin URLs; `robots.txt` allows crawling and points to that sitemap; the temporary noindex header/meta is absent. JSON contains 17 records; CSV returns 17 data rows plus a header; JS and CSS assets returned 200.
 - DNS: only the apex and `www` CNAME targets were changed to `mesisem-public-resources.pages.dev`; existing proxy and TTL settings were preserved. Other DNS records, including mail, verification and nameserver records, were not changed. The Vercel project was not deleted; public DNS no longer points these hosts to it.
 - `SITE_URL`: production setting is `https://mesisemglobal.com`; canonical URLs and sitemap now use the approved origin.
-- Databases: none changed in this hosting release. The current application serves static JSON/CSV; a Supabase/Neon source-of-truth and synchronization plan remains a separate follow-up.
+- Databases: the user chose to keep the existing static JSON/CSV catalog; no Supabase/Neon database or runtime dependency was added.
 - Costs and secrets: no paid add-ons or secret changes were made.
 - Follow-up: decide whether and when to submit the sitemap to search engines; review the database data flow before adding a backend.
 
